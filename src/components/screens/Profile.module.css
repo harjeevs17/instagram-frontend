@@ -1,0 +1,45 @@
+.profileBox {
+  height: 10vh;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: row;
+  padding: 30px;
+}
+.profileImgContainer {
+  width: 250px;
+}
+.profileImgContainer img {
+  display: block;
+  margin: auto;
+}
+.username {
+  font-size: 30px;
+}
+.stats {
+  margin-top: 10px;
+  font-size: 18px;
+}
+.stats span {
+  margin-right: 20px;
+}
+.email {
+  margin-top: 10px;
+}
+.line {
+  height: 1px;
+  margin-bottom: 10px;
+  background-color: gray;
+}
+.gallery {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+.gallery img {
+  width: 30%;
+  margin: 5px 5px 5px 5px;
+}

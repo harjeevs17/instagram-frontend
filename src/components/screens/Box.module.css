@@ -1,0 +1,30 @@
+.box {
+  display: flex;
+  height: 80vh;
+  align-self: center;
+  align-items: center; /* Vertical */
+  justify-content: center; /* Horizontal */
+}
+
+.innerbox {
+  width: 400px;
+  height: 400px;
+  border: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+  border-radius: 1px;
+}
+.form {
+  padding: 20px;
+  text-align: center;
+}
+.instaFont {
+  font-family: "Grand Hotel", cursive;
+}
+.submit {
+  width: "100%";
+  background-color: red;
+  border-radius: 2px;
+  height: 20px;
+}
+.bottomOptions {
+  padding-top: 20px;
+}
