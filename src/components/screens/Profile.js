@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styles from "./Profile.module.css";
+import { getUserPost } from "../../api/api";
+import { UserContext } from "../../App";
 const Profile = () => {
+  const [data, setData] = useState([]);
+  const { state, dispatch } = useContext(UserContext);
+  useEffect(() => {
+    async function fetchData() {
+      await getUserPost(setData);
+    }
+    fetchData();
+  }, []);
+
   return (
     <>
       <div className={styles.profileBox}>
@@ -13,41 +24,24 @@ const Profile = () => {
             />
           </div>
           <div>
-            <div className={styles.username}>harjeevs17</div>
+            <div className={styles.username}>
+              {state ? state.name : "Loading"}
+            </div>
             <div className={styles.stats}>
-              <span>4 posts</span>
+              <span>{data.length} posts</span>
               <span>150 followers</span>
               <span>194 following</span>
             </div>
-            <div className={styles.email}>Harjeev Singh</div>
+            <div className={styles.email}>
+              {state ? state.email : "Loading"}
+            </div>
           </div>
         </div>
         <div className={styles.line}></div>
         <div className={styles.gallery}>
-          <img
-            alt="post"
-            src="https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-          />
-          <img
-            alt="post"
-            src="https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-          />
-          <img
-            alt="post"
-            src="https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-          />
-          <img
-            alt="post"
-            src="https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-          />
-          <img
-            alt="post"
-            src="https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-          />
-          <img
-            alt="post"
-            src="https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-          />
+          {data.map((item) => (
+            <img alt="post" src={item.photo} />
+          ))}
         </div>
       </div>
     </>

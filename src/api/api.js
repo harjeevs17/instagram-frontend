@@ -60,3 +60,45 @@ export const getPost = async (setData) => {
       console.log(err);
     });
 };
+
+export const getUserPost = async (setData) => {
+  const url = server + "/myposts";
+  axios
+    .get(url, {
+      headers: header,
+    })
+    .then((res) => {
+      setData(res.data.posts);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const PostLike = (info) => {
+  const url = server + "/like";
+  axios
+    .put(url, info, {
+      headers: header,
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const PostUnlike = (info) => {
+  const url = server + "/unlike";
+  axios
+    .put(url, info, {
+      headers: header,
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
