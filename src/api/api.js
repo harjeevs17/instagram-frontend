@@ -75,7 +75,7 @@ export const getUserPost = async (setData) => {
     });
 };
 
-export const PostLike = (info) => {
+export const PostLike = (info, setLikes) => {
   const url = server + "/like";
   axios
     .put(url, info, {

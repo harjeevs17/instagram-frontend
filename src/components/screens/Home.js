@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import styles from "./Home.module.css";
 import "./Home.modules.css";
-import { getPost, PostLike, PostUnlike } from "../../api/api";
+import { getPost } from "../../api/api";
+import Likes from "./Likes";
 import { UserContext } from "../../App";
 const Home = () => {
   const { state, dispatch } = useContext(UserContext);
@@ -12,30 +13,12 @@ const Home = () => {
     }
     fetchData();
   }, []);
-  console.log("data is", data);
-  console.log("state is", state);
-  const Feedback = (postId, mode) => {
-    mode == 0 ? likePost(postId) : unlikePost(postId);
-  };
-  const likePost = async (postId) => {
-    const info = {
-      postId,
-    };
-    console.log("Liked", info);
-    const data = await PostLike(info);
-    alert("Liked");
-  };
-  const unlikePost = async (postId) => {
-    const info = {
-      postId,
-    };
-    console.log("Unliked");
-    const data = await PostUnlike(info);
-    alert("Liked");
-  };
+  console.log(data);
   return (
     <div className={styles.box}>
       <div className={styles.innerbox}>
+        <p>{state ? state.name : ""}</p>
+        <p>{state ? state._id : ""}</p>
         {data.map((item, key) => (
           <div className="card" key={key}>
             <h5>{item.postedBy.name}</h5>
@@ -51,24 +34,7 @@ const Home = () => {
               />
             </div>
             <div className="card-content">
-              {item.likes.includes(state._id) ? (
-                <i
-                  onClick={() => unlikePost(item._id)}
-                  className="material-icons"
-                  style={{ color: "red", fontSize: "30px" }}
-                >
-                  favorite
-                </i>
-              ) : (
-                <i
-                  onClick={() => likePost(item._id)}
-                  className="material-icons"
-                  style={{ color: "black", fontSize: "30px" }}
-                >
-                  favorite
-                </i>
-              )}
-              <p>{item.likes.length} likes</p>
+              <Likes likes={item.likes} postId={item._id} />
               <h6>{item.title}</h6>
               <p>{item.body}</p>
               <input type="text" placeholder="Add a comment" />
