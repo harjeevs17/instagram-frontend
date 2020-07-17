@@ -49,16 +49,14 @@ export const createPost = async (info, response) => {
 
 export const getPost = async (setData) => {
   const url = server + "/allpost";
-  axios
-    .get(url, {
-      headers: header,
-    })
-    .then((res) => {
-      setData(res.data.posts);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  try {
+    const {
+      data: { posts },
+    } = await axios.get(url, { headers: header });
+    return posts;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const getUserPost = async (setData) => {
@@ -100,5 +98,19 @@ export const PostUnlike = (info) => {
     })
     .catch((err) => {
       console.log(err);
+    });
+};
+
+export const insertComment = (info) => {
+  const url = server + "/comment";
+  axios
+    .put(url, info, {
+      headers: header,
+    })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log("sad", err);
     });
 };
