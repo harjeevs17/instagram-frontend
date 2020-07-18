@@ -4,9 +4,10 @@ import "./Home.modules.css";
 import { getPost, insertComment } from "../../api/api";
 import Likes from "./Likes";
 import { UserContext } from "../../App";
+import Comment from "./Comment";
 const Home = () => {
   const { state, dispatch } = useContext(UserContext);
-  const [comments, setComments] = useState([]);
+
   const [data, setData] = useState([]);
   useEffect(() => {
     async function fetchData() {
@@ -15,17 +16,7 @@ const Home = () => {
     fetchData();
   }, []);
   console.log("front", data);
-  console.log("comments", comments);
-  const addComment = (e, postId) => {
-    console.log("id", postId);
-    if (e.key === "Enter") {
-      const data = {
-        comment: e.target.value,
-        postId: postId,
-      };
-      insertComment(data);
-    }
-  };
+
   return (
     <div className={styles.box}>
       <div className={styles.innerbox}>
@@ -49,11 +40,7 @@ const Home = () => {
               <Likes likes={item.likes} postId={item._id} />
               <h6>{item.title}</h6>
               <p>{item.body}</p>
-              <input
-                type="text"
-                placeholder="Add a comment"
-                onKeyDown={(e) => addComment(e, item._id)}
-              />
+              <Comment comment={item.comments} postId={item._id} />
             </div>
           </div>
         ))}

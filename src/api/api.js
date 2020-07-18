@@ -101,16 +101,15 @@ export const PostUnlike = (info) => {
     });
 };
 
-export const insertComment = (info) => {
+export const insertComment = async (info) => {
   const url = server + "/comment";
-  axios
-    .put(url, info, {
-      headers: header,
-    })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((err) => {
-      console.log("sad", err);
-    });
+  const {
+    data: {
+      result: { comments },
+    },
+  } = await axios.put(url, info, {
+    headers: header,
+  });
+  console.log("backkk", comments);
+  return comments;
 };
