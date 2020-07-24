@@ -5,6 +5,7 @@ import { getPost, insertComment } from "../../api/api";
 import Likes from "./Likes";
 import { UserContext } from "../../App";
 import Comment from "./Comment";
+import { Link } from "react-router-dom";
 const Home = () => {
   const { state, dispatch } = useContext(UserContext);
 
@@ -24,7 +25,9 @@ const Home = () => {
         <p>{state ? state._id : ""}</p>
         {data.map((item, key) => (
           <div className="card" key={key}>
-            <h5>{item.postedBy.name}</h5>
+            <Link to={{ pathname: `userprofile/${item.postedBy._id}` }}>
+              <h5>{item.postedBy.name}</h5>
+            </Link>
             <div>
               <img
                 className={styles.test}

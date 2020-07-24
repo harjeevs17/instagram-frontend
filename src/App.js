@@ -2,6 +2,7 @@ import React, { createContext, useReducer, useEffect, useContext } from "react";
 import "./App.css";
 import Home from "../src/components/screens/Home";
 import Profile from "../src/components/screens/Profile";
+import UserProfile from "../src/components/screens/UserProfile";
 import SignIn from "../src/components/screens/Login";
 import SignUp from "../src/components/screens/Signup";
 import Create from "../src/components/screens/Create";
@@ -29,6 +30,7 @@ const Routing = () => {
       <Route exact path="/signup" component={SignUp} />
       <Route exact path="/profile" component={Profile} />
       <Route exact path="/create" component={Create} />
+      <Route exact path="/userprofile/:userid" component={UserProfile} />
     </Switch>
   );
 };

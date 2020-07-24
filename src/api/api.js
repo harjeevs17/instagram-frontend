@@ -142,3 +142,16 @@ export const deletePost = async (id) => {
   });
   return false;
 };
+
+export const getUserProfilePosts = async (id) => {
+  const header = {
+    Authorization: "Bearer " + localStorage.getItem("jwt"),
+  };
+  const url = server + "/userprofile/" + id;
+  console.log(url);
+  const { data } = await axios.get(url, {
+    headers: header,
+  });
+  console.log("asd", data);
+  return data;
+};
