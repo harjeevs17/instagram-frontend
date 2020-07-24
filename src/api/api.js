@@ -1,8 +1,8 @@
 import axios from "axios";
 const server = "http://localhost:5000";
-const header = {
+/*const header = {
   Authorization: "Bearer " + localStorage.getItem("jwt"),
-};
+};*/
 
 export const signUpCall = async (info, response) => {
   const url = server + "/signup";
@@ -30,6 +30,9 @@ export const signInCall = async (info, response, userdata) => {
 };
 
 export const createPost = async (info, response) => {
+  const header = {
+    Authorization: "Bearer " + localStorage.getItem("jwt"),
+  };
   const url = server + "/createpost";
   axios
     .post(url, info, {
@@ -48,6 +51,9 @@ export const createPost = async (info, response) => {
 };
 
 export const getPost = async (setData) => {
+  const header = {
+    Authorization: "Bearer " + localStorage.getItem("jwt"),
+  };
   const url = server + "/allpost";
   try {
     const {
@@ -60,6 +66,9 @@ export const getPost = async (setData) => {
 };
 
 export const getUserPost = async (setData) => {
+  const header = {
+    Authorization: "Bearer " + localStorage.getItem("jwt"),
+  };
   const url = server + "/myposts";
   axios
     .get(url, {
@@ -74,6 +83,9 @@ export const getUserPost = async (setData) => {
 };
 
 export const PostLike = (info, setLikes) => {
+  const header = {
+    Authorization: "Bearer " + localStorage.getItem("jwt"),
+  };
   const url = server + "/like";
   axios
     .put(url, info, {
@@ -88,6 +100,9 @@ export const PostLike = (info, setLikes) => {
 };
 
 export const PostUnlike = (info) => {
+  const header = {
+    Authorization: "Bearer " + localStorage.getItem("jwt"),
+  };
   const url = server + "/unlike";
   axios
     .put(url, info, {
@@ -102,6 +117,9 @@ export const PostUnlike = (info) => {
 };
 
 export const insertComment = async (info) => {
+  const header = {
+    Authorization: "Bearer " + localStorage.getItem("jwt"),
+  };
   const url = server + "/comment";
   const {
     data: {
@@ -112,4 +130,15 @@ export const insertComment = async (info) => {
   });
   console.log("backkk", comments);
   return comments;
+};
+
+export const deletePost = async (id) => {
+  const header = {
+    Authorization: "Bearer " + localStorage.getItem("jwt"),
+  };
+  const url = server + "/delete/" + id;
+  const { data } = await axios.delete(url, {
+    headers: header,
+  });
+  return false;
 };

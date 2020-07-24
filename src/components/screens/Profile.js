@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import styles from "./Profile.module.css";
 import { getUserPost } from "../../api/api";
+import ProfilePosts from "./ProfilePosts";
 import { UserContext } from "../../App";
 const Profile = () => {
   const [data, setData] = useState([]);
@@ -11,7 +12,6 @@ const Profile = () => {
     }
     fetchData();
   }, []);
-
   return (
     <>
       <div className={styles.profileBox}>
@@ -38,10 +38,12 @@ const Profile = () => {
           </div>
         </div>
         <div className={styles.line}></div>
-        <div className={styles.gallery}>
-          {data.map((item) => (
-            <img alt="post" src={item.photo} />
-          ))}
+        <div className={styles.wrapper}>
+          <div className={styles.imageWrapper}>
+            {data.map((item, key) => (
+              <ProfilePosts data={item} key={key} />
+            ))}
+          </div>
         </div>
       </div>
     </>
