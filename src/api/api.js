@@ -155,3 +155,28 @@ export const getUserProfilePosts = async (id) => {
   console.log("asd", data);
   return data;
 };
+
+export const followUser = async (id) => {
+  const header = {
+    Authorization: "Bearer " + localStorage.getItem("jwt"),
+  };
+  const url = server + "/followUser/" + id;
+  console.log(url);
+  const { data } = await axios.get(url, {
+    headers: header,
+  });
+  console.log("asd", data.result1.followers.length);
+  return data.result1.followers.length;
+};
+
+export const unfollowUser = async (id) => {
+  const header = {
+    Authorization: "Bearer " + localStorage.getItem("jwt"),
+  };
+  const url = server + "/unfollowUser/" + id;
+  console.log(url);
+  const { data } = await axios.get(url, {
+    headers: header,
+  });
+  return data.result1.followers.length;
+};

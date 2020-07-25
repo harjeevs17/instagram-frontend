@@ -10,7 +10,7 @@ const Navbar = () => {
     if (state) {
       return [
         <li>
-          <Link to="/profile">Profile</Link>
+          <Link to={{ pathname: `userprofile/${state._id}` }}>Profile</Link>
         </li>,
         <li>
           <Link to="/create">Create</Link>

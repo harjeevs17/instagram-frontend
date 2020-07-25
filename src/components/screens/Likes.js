@@ -30,7 +30,11 @@ const Likes = (props) => {
       <i
         className="material-icons"
         onClick={likeToggle}
-        style={{ color: liked == true ? "red" : "black", fontSize: "30px" }}
+        style={{
+          color: liked == true ? "red" : "black",
+          fontSize: "30px",
+          cursor: "pointer",
+        }}
       >
         favorite
       </i>

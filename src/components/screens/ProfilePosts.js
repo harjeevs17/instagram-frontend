@@ -17,13 +17,17 @@ const ProfilePosts = (props) => {
       {active == true ? (
         <>
           <img alt="post" src={props.data.photo} />
-          <i
-            onClick={() => deleteP(props.data._id)}
-            style={{ visibility: "hidden" }}
-            className="material-icons"
-          >
-            delete
-          </i>
+          {props.sameuser == true ? (
+            <i
+              onClick={() => deleteP(props.data._id)}
+              style={{ visibility: "hidden" }}
+              className="material-icons"
+            >
+              delete
+            </i>
+          ) : (
+            ""
+          )}
         </>
       ) : (
         ""
