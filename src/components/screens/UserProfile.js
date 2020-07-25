@@ -1,6 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import styles from "./Profile.module.css";
-import { getUserProfilePosts, followUser, unfollowUser } from "../../api/api";
+import {
+  getUserProfilePosts,
+  followUser,
+  unfollowUser,
+  updatePicture,
+} from "../../api/api";
 import ProfilePosts from "./ProfilePosts";
 import { UserContext } from "../../App";
 import { useParams } from "react-router-dom";
@@ -10,14 +15,16 @@ const UserProfile = () => {
   const [data, setData] = useState([]);
   const [sameUser, setSameUser] = useState(false);
   const [followers, setfollowers] = useState(0);
+  const [picture, setpicture] = useState("");
   const { state, dispatch } = useContext(UserContext);
   const [doesfollow, setdoesfollow] = useState(false);
   useEffect(() => {
     async function fetchData() {
       await getUserProfilePosts(userid).then((res) => {
         setData(res);
+        setpicture(res.user.picture);
         setfollowers(res.user.followers.length);
-        console.log("resid", res.user._id);
+        console.log("resid", res);
         console.log("state", state._id);
         if (res.user._id === state._id) {
           console.log("same");
@@ -41,7 +48,42 @@ const UserProfile = () => {
     setfollowers(await unfollowUser(id));
     setdoesfollow(false);
   };
-  console.log("same", sameUser);
+  const test = (pic) => {
+    setpicture(pic);
+    const data = new FormData();
+    data.append("file", pic);
+    data.append("upload_preset", "instagram");
+    data.append("cloud_name", "instagram-clone-harjeev");
+    if (picture) {
+      fetch(
+        "http://api.cloudinary.com/v1_1/instagram-clone-harjeev/image/upload",
+        {
+          method: "POST",
+          body: data,
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          const FetchAPI = async () => {
+            localStorage.getItem(
+              "user",
+              JSON.stringify({ ...state, picture: data.secure_url })
+            );
+            dispatch({ type: "UPDATEPIC", payload: data.secure_url });
+            await updatePicture(data.secure_url).then((res) => {
+              console.log("stateInn", state);
+              setpicture(data.secure_url);
+            });
+          };
+          FetchAPI();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      // M.toast({ html: "Please Enter all fields" });
+    }
+  };
   return (
     <>
       {data.user != undefined && data.posts != undefined ? (
@@ -49,9 +91,9 @@ const UserProfile = () => {
           <div className={styles.profileInfo}>
             <div className={styles.profileImgContainer}>
               <img
-                style={{ borderRadius: "100%" }}
+                style={{ borderRadius: "100%", height: 150 }}
                 alt="profileImage"
-                src="https://instagram.fdel3-1.fna.fbcdn.net/v/t51.2885-19/s150x150/13129942_1836623523231666_842799317_a.jpg?_nc_ht=instagram.fdel3-1.fna.fbcdn.net&_nc_ohc=iR3aXkFco8YAX_ZChQD&oh=d606848434cda3983f110f95bc4f0926&oe=5F3332B4"
+                src={picture}
               />
             </div>
             <div>
@@ -73,7 +115,18 @@ const UserProfile = () => {
                   </button>
                 )
               ) : (
-                ""
+                <div class="file-field input-field">
+                  <div class="btn">
+                    <span>File</span>
+                    <input
+                      onChange={(e) => test(e.target.files[0])}
+                      type="file"
+                    />
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" />
+                  </div>
+                </div>
               )}
             </div>
           </div>

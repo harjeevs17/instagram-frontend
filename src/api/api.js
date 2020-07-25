@@ -180,3 +180,19 @@ export const unfollowUser = async (id) => {
   });
   return data.result1.followers.length;
 };
+
+export const updatePicture = async (photo) => {
+  const info = {
+    picture: photo,
+  };
+  const header = {
+    Authorization: "Bearer " + localStorage.getItem("jwt"),
+  };
+  const url = server + "/updatePicture";
+  console.log(url);
+  const data = await axios.post(url, info, {
+    headers: header,
+  });
+  console.log("result", data);
+  //return data.result1.followers.length;
+};
