@@ -196,3 +196,12 @@ export const updatePicture = async (photo) => {
   console.log("result", data);
   //return data.result1.followers.length;
 };
+
+export const search = async (search) => {
+  const info = { search };
+  const url = server + "/searchUser";
+  console.log(url);
+  const { data } = await axios.post(url, info);
+  console.log("result", data);
+  return data;
+};

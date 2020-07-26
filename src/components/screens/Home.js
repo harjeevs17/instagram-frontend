@@ -20,9 +20,14 @@ const Home = () => {
 
   return (
     <div className={styles.box}>
+      {data.length == 0 ? (
+        <h5 style={{ textAlign: "center" }}>
+          You could use the search feature to find some users
+        </h5>
+      ) : (
+        ""
+      )}
       <div className={styles.innerbox}>
-        <p>{state ? state.name : ""}</p>
-        <p>{state ? state._id : ""}</p>
         {data.map((item, key) => (
           <div className="card" key={key}>
             <Link to={{ pathname: `userprofile/${item.postedBy._id}` }}>

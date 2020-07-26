@@ -9,7 +9,7 @@ import {
 import ProfilePosts from "./ProfilePosts";
 import { UserContext } from "../../App";
 import { useParams } from "react-router-dom";
-const UserProfile = () => {
+const UserProfile = (props) => {
   //const [u_id, setuserid] = useState("");
   const { userid } = useParams();
   const [data, setData] = useState([]);
@@ -18,10 +18,13 @@ const UserProfile = () => {
   const [picture, setpicture] = useState("");
   const { state, dispatch } = useContext(UserContext);
   const [doesfollow, setdoesfollow] = useState(false);
+  const [imageLoading, setimageLoading] = useState(true);
+  const [reloader, setreloader] = useState(0);
   useEffect(() => {
     async function fetchData() {
       await getUserProfilePosts(userid).then((res) => {
         setData(res);
+        setimageLoading(false);
         setpicture(res.user.picture);
         setfollowers(res.user.followers.length);
         console.log("resid", res);
@@ -39,6 +42,9 @@ const UserProfile = () => {
       fetchData();
     }
   }, [state]);
+  useEffect(() => {
+    console.log("math", props);
+  }, [reloader]);
 
   const follow = async (id) => {
     setfollowers(await followUser(id));
@@ -50,6 +56,7 @@ const UserProfile = () => {
   };
   const test = (pic) => {
     setpicture(pic);
+    setimageLoading(true);
     const data = new FormData();
     data.append("file", pic);
     data.append("upload_preset", "instagram");
@@ -64,6 +71,8 @@ const UserProfile = () => {
       )
         .then((res) => res.json())
         .then((data) => {
+          console.log("image", data.secure_url);
+          setimageLoading(false);
           const FetchAPI = async () => {
             localStorage.getItem(
               "user",
@@ -92,8 +101,12 @@ const UserProfile = () => {
             <div className={styles.profileImgContainer}>
               <img
                 style={{ borderRadius: "100%", height: 150 }}
-                alt="profileImage"
-                src={picture}
+                alt=""
+                src={
+                  imageLoading != true
+                    ? picture
+                    : "https://vnnc.org/wp-content/plugins/gallery-by-supsystic/src/GridGallery/Galleries/assets/img/loading.gif"
+                }
               />
             </div>
             <div>
@@ -115,7 +128,8 @@ const UserProfile = () => {
                   </button>
                 )
               ) : (
-                <div class="file-field input-field">
+                <></>
+                /*<div class="file-field input-field">
                   <div class="btn">
                     <span>File</span>
                     <input
@@ -126,7 +140,7 @@ const UserProfile = () => {
                   <div class="file-path-wrapper">
                     <input class="file-path validate" type="text" />
                   </div>
-                </div>
+                </div>*/
               )}
             </div>
           </div>
@@ -140,7 +154,7 @@ const UserProfile = () => {
           </div>
         </div>
       ) : (
-        "Loading"
+        <h5 style={{ textAlign: "center" }}>Loading</h5>
       )}
     </>
   );
