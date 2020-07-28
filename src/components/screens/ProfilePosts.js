@@ -13,7 +13,7 @@ const ProfilePosts = (props) => {
     deleteAPI();
   };
   return (
-    <span className={styles.imgItem}>
+    <div className={styles.imageWrapper}>
       {active == true ? (
         <>
           <img alt="post" src={props.data.photo} />
@@ -32,7 +32,7 @@ const ProfilePosts = (props) => {
       ) : (
         ""
       )}
-    </span>
+    </div>
   );
 };
 

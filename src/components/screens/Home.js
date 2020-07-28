@@ -19,32 +19,26 @@ const Home = () => {
   console.log("front", data);
 
   return (
-    <div className={styles.box}>
-      {data.length == 0 ? (
-        <h5 style={{ textAlign: "center" }}>
-          You could use the search feature to find some users
-        </h5>
-      ) : (
-        ""
-      )}
-      <div className={styles.innerbox}>
+    <>
+      <div className={styles.main}>
         {data.map((item, key) => (
-          <div className="card" key={key}>
-            <Link to={{ pathname: `userprofile/${item.postedBy._id}` }}>
-              <h5>{item.postedBy.name}</h5>
-            </Link>
-            <div>
+          <div
+            className="card"
+            style={{ display: "flex", justifyContent: "center" }}
+          >
+            <div className="card-content">
+              <Link to={{ pathname: `userprofile/${item.postedBy._id}` }}>
+                <h5>{item.postedBy.name}</h5>
+              </Link>
               <img
-                className={styles.test}
-                alt=""
+                className={styles.image}
                 src={
                   item.photo === "No photo"
                     ? "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/480px-No_image_available.svg.png"
                     : item.photo
                 }
               />
-            </div>
-            <div className="card-content">
+
               <Likes likes={item.likes} postId={item._id} />
               <h6>{item.title}</h6>
               <p>{item.body}</p>
@@ -53,7 +47,7 @@ const Home = () => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 export default Home;

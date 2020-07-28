@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { search } from "../api/api";
 import M from "materialize-css";
 import { UserContext } from "../App";
-
+import logo from "../assets/logo.png";
 const Navbar = () => {
   const { state, dispatch } = useContext(UserContext);
   const [query, setquery] = useState("");
@@ -61,7 +61,7 @@ const Navbar = () => {
     <nav>
       <div className="nav-wrapper white">
         <Link className="brand-logo left" to={state ? "/" : "/signin"}>
-          Instagram
+          <img src={logo} style={{ height: "50px", padding: "5px" }} />
         </Link>
         <ul id="nav-mobile" className="right">
           {renderList()}

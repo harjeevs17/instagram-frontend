@@ -14,3 +14,44 @@
   height: 65vh;
   object-fit: cover;
 }
+
+.main {
+  border: 1px solid #d9d9d9;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+.image {
+  max-width: 100%;
+
+  position: relative;
+}
+i {
+  width: 100%;
+}
+@media screen and (max-width: 480px) and (min-width: 200px) {
+  .image {
+    width: 350px;
+    height: 350px;
+  }
+}
+@media screen and (max-width: 720px) and (min-width: 481px) {
+  .image {
+    width: 450px;
+    height: 450px;
+  }
+}
+@media screen and (max-width: 1024px) and (min-width: 720px) {
+  .image {
+    width: 550px;
+    height: 550px;
+  }
+}
+@media screen and (min-width: 1025px) {
+  .image {
+    width: 550px;
+    height: 550px;
+  }
+}

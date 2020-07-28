@@ -36,7 +36,7 @@ const Likes = (props) => {
           cursor: "pointer",
         }}
       >
-        favorite
+        {liked == true ? "favorite" : "favorite_outline"}
       </i>
       <p>{totalLikes} likes</p>
     </>

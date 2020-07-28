@@ -100,7 +100,7 @@ const UserProfile = (props) => {
           <div className={styles.profileInfo}>
             <div className={styles.profileImgContainer}>
               <img
-                style={{ borderRadius: "100%", height: 150 }}
+                className={styles.profileImg}
                 alt=""
                 src={
                   imageLoading != true
@@ -109,7 +109,7 @@ const UserProfile = (props) => {
                 }
               />
             </div>
-            <div>
+            <div className={styles.statsContainer}>
               <div className={styles.username}>{data.user.name}</div>
               <div className={styles.stats}>
                 <span>{data.posts.length} posts</span>
@@ -119,11 +119,19 @@ const UserProfile = (props) => {
               <div className={styles.email}>{data.user.email}</div>
               {sameUser == false ? (
                 doesfollow == true ? (
-                  <button onClick={() => unfollow(data.user._id)} class="btn">
+                  <button
+                    style={{ marginTop: "10px" }}
+                    onClick={() => unfollow(data.user._id)}
+                    class="btn"
+                  >
                     UnFollow
                   </button>
                 ) : (
-                  <button onClick={() => follow(data.user._id)} class="btn">
+                  <button
+                    style={{ marginTop: "10px" }}
+                    onClick={() => follow(data.user._id)}
+                    class="btn"
+                  >
                     Follow
                   </button>
                 )
@@ -146,11 +154,9 @@ const UserProfile = (props) => {
           </div>
           <div className={styles.line}></div>
           <div className={styles.wrapper}>
-            <div className={styles.imageWrapper}>
-              {data.posts.map((item, key) => (
-                <ProfilePosts data={item} key={key} sameuser={sameUser} />
-              ))}
-            </div>
+            {data.posts.map((item, key) => (
+              <ProfilePosts data={item} key={key} sameuser={sameUser} />
+            ))}
           </div>
         </div>
       ) : (

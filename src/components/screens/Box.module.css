@@ -1,9 +1,9 @@
 .box {
   display: flex;
-  height: 80vh;
-  align-self: center;
-  align-items: center; /* Vertical */
-  justify-content: center; /* Horizontal */
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  width: 100%;
 }
 
 .innerbox {
