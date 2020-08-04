@@ -9,6 +9,7 @@ import Create from "../src/components/screens/Create";
 import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import { reducer, initialState } from "./reducers/userReducer";
 import Navbar from "../src/components/Navbar";
+import { HashRouter as Router } from "react-router-dom";
 export const UserContext = createContext();
 
 const Routing = () => {
@@ -40,10 +41,10 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={{ state: state, dispatch: dispatch }}>
-        <BrowserRouter>
+        <Router>
           <Navbar />
           <Routing />
-        </BrowserRouter>
+        </Router>
       </UserContext.Provider>
     </div>
   );
