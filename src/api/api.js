@@ -1,5 +1,6 @@
 import axios from "axios";
-const server = "http://localhost:5000";
+//const server = "http://localhost:5000";
+const server = "https://instagram-backend-clone.herokuapp.com";
 /*const header = {
   Authorization: "Bearer " + localStorage.getItem("jwt"),
 };*/
