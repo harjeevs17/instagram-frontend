@@ -23,7 +23,7 @@ const Create = () => {
     data.append("cloud_name", "instagram-clone-harjeev");
     if (image && title && desc) {
       fetch(
-        "http://api.cloudinary.com/v1_1/instagram-clone-harjeev/image/upload",
+        "https://api.cloudinary.com/v1_1/instagram-clone-harjeev/image/upload",
         {
           method: "POST",
           body: data,
