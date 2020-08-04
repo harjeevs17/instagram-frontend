@@ -10,7 +10,7 @@ import ProfilePosts from "./ProfilePosts";
 import { UserContext } from "../../App";
 import { useParams } from "react-router-dom";
 const UserProfile = (props) => {
-  //const [u_id, setuserid] = useState("");
+  const [u_id, setuserid] = useState("");
   const { userid } = useParams();
   const [data, setData] = useState([]);
   const [sameUser, setSameUser] = useState(false);
@@ -41,10 +41,11 @@ const UserProfile = (props) => {
     if (state) {
       fetchData();
     }
-  }, [state]);
+  }, [state, reloader]);
   useEffect(() => {
-    console.log("math", props);
-  }, [reloader]);
+    console.log("matbbbh", props.location.rand);
+    setreloader(props.location.rand);
+  }, [props.location.rand]);
 
   const follow = async (id) => {
     setfollowers(await followUser(id));
@@ -93,6 +94,7 @@ const UserProfile = (props) => {
       // M.toast({ html: "Please Enter all fields" });
     }
   };
+
   return (
     <>
       {data.user != undefined && data.posts != undefined ? (

@@ -9,6 +9,7 @@ const Signup = () => {
   const [password, setpassword] = useState("");
   const [response, setresponse] = useState("");
   const [image, setImage] = useState("");
+  const [btn, setbtn] = useState(false);
   useEffect(() => {
     if (response) {
       M.toast({ html: response });
@@ -28,6 +29,7 @@ const Signup = () => {
   };*/
 
   const signUpFunction = () => {
+    setbtn(true);
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "instagram");
@@ -51,7 +53,9 @@ const Signup = () => {
             picture: data.secure_url,
           };
           const FetchAPI = async () => {
-            await signUpCall(info, setresponse);
+            await signUpCall(info, setresponse).then((res) => {
+              setbtn(false);
+            });
           };
           FetchAPI();
         })
@@ -99,11 +103,12 @@ const Signup = () => {
             </div>
           </div>
           <button
+            disabled={btn ? true : false}
             onClick={signUpFunction}
             className="btn waves-effect waves-light"
             type="button"
           >
-            Login
+            {btn === true ? "Loading" : "Sign Up"}
           </button>
           <div className={styles.bottomOptions}>
             <Link to="/signin">Already have an account</Link>

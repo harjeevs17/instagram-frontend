@@ -10,6 +10,7 @@ const Login = () => {
   const [password, setpassword] = useState("");
   const [response, setresponse] = useState("");
   const [userData, setuserData] = useState({});
+  const [loading, setLoading] = useState(false);
   let history = useHistory();
   useEffect(() => {
     if (response) {
@@ -26,12 +27,15 @@ const Login = () => {
     console.log("use data", userData);
   }, [response, userData, history, dispatch]);
   const LoginFunction = () => {
+    setLoading(true);
     const info = {
       email,
       password,
     };
     const fetchAPI = async () => {
-      await signInCall(info, setresponse, setuserData);
+      await signInCall(info, setresponse, setuserData).then((res) => {
+        setLoading(false);
+      });
     };
     fetchAPI();
   };
@@ -54,10 +58,11 @@ const Login = () => {
           />
           <button
             onClick={LoginFunction}
+            disabled={loading ? true : false}
             className="btn waves-effect waves-light"
             type="button"
           >
-            Login
+            {loading ? "Loading" : "Login"}
           </button>
           <div className={styles.bottomOptions}>
             <Link to="/signup">Don't have an account</Link>

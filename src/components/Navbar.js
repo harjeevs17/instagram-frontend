@@ -28,7 +28,7 @@ const Navbar = () => {
           </a>
         </li>,
         <li>
-          <Link to={{ pathname: `userprofile/${state._id}` }}>Profile</Link>
+          <Link to={{ pathname: `/userprofile/${state._id}` }}>Profile</Link>
         </li>,
         <li>
           <Link to="/create">Create</Link>
@@ -85,9 +85,10 @@ const Navbar = () => {
               {data.map((item) => {
                 return (
                   <Link
-                    /*to={{ pathname: `/userprofile/${item._id}` }} */ to={
-                      "/userprofile/" + item._id
-                    }
+                    to={{
+                      pathname: `/userprofile/${item._id}`,
+                      rand: Math.random(),
+                    }}
                     onClick={() => {
                       M.Modal.getInstance(searchModal.current).close();
                       setquery("");
