@@ -34,7 +34,7 @@ const Signup = () => {
     data.append("cloud_name", "instagram-clone-harjeev");
     if (name && email && password && image) {
       fetch(
-        "http://api.cloudinary.com/v1_1/instagram-clone-harjeev/image/upload",
+        "https://api.cloudinary.com/v1_1/instagram-clone-harjeev/image/upload",
         {
           method: "POST",
           body: data,
