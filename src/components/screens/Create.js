@@ -9,6 +9,7 @@ const Create = () => {
   const [image, setImage] = useState("");
   const [response, setresponse] = useState("");
   const history = useHistory();
+  const [btn, setBtn] = useState("Upload");
   //const [cloudImage, setcloudImage] = useState("");
   useEffect(() => {
     if (response) {
@@ -17,6 +18,7 @@ const Create = () => {
     }
   });
   const PostCloud = () => {
+    setBtn("Loading...");
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "instagram");
@@ -39,7 +41,9 @@ const Create = () => {
             photo: data.secure_url,
           };
           const FetchAPI = async () => {
-            await createPost(info, setresponse);
+            await createPost(info, setresponse).then((res) => {
+              setBtn("Upload");
+            });
           };
           FetchAPI();
         })
@@ -83,7 +87,7 @@ const Create = () => {
             className="btn waves-effect waves-light"
             type="button"
           >
-            Post
+            {btn}
           </button>
         </form>
       </div>
