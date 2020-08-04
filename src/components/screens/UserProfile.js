@@ -7,6 +7,8 @@ import {
   updatePicture,
 } from "../../api/api";
 import ProfilePosts from "./ProfilePosts";
+import { motion } from "framer-motion";
+
 import { UserContext } from "../../App";
 import { useParams } from "react-router-dom";
 const UserProfile = (props) => {
@@ -155,11 +157,21 @@ const UserProfile = (props) => {
             </div>
           </div>
           <div className={styles.line}></div>
-          <div className={styles.wrapper}>
+          <motion.div
+            initial={{
+              y: 100,
+              opacity: 0,
+            }}
+            animate={{
+              y: 0,
+              opacity: 1,
+            }}
+            className={styles.wrapper}
+          >
             {data.posts.map((item, key) => (
               <ProfilePosts data={item} key={key} sameuser={sameUser} />
             ))}
-          </div>
+          </motion.div>
         </div>
       ) : (
         <h5 style={{ textAlign: "center" }}>Loading</h5>

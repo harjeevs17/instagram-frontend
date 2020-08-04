@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import styles from "./Home.module.css";
 import "./Home.modules.css";
+import { motion } from "framer-motion";
+
 import { getPost, insertComment } from "../../api/api";
 import Likes from "./Likes";
 import { UserContext } from "../../App";
@@ -22,7 +24,15 @@ const Home = () => {
     <>
       <div className={styles.main}>
         {data.map((item, key) => (
-          <div
+          <motion.div
+            initial={{
+              y: 100,
+              opacity: 0,
+            }}
+            animate={{
+              y: 0,
+              opacity: 1,
+            }}
             className="card"
             style={{ display: "flex", justifyContent: "center" }}
           >
@@ -44,7 +54,7 @@ const Home = () => {
               <p>{item.body}</p>
               <Comment comment={item.comments} postId={item._id} />
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </>
