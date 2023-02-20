@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/instagram-frontend/precache-manifest.2060b0654a50756c5375cd739e14f43f.js"
+  "/instagram-frontend/precache-manifest.c4baceb26622fa718dc688bec308769c.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -35,5 +35,5 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/instagram-frontend/index.html"), {
   
-  blacklist: [/^\/_/,/\/[^\/?]+\.[^\/]+$/],
+  blacklist: [/^\/_/,/\/[^/?]+\.[^/]+$/],
 });
